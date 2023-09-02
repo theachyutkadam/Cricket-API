@@ -7,7 +7,7 @@ FactoryBot.define do
     is_draw { false }
     start_at { "2023-09-02 22:23:05" }
     end_at { "2023-09-02 22:23:05" }
-    toss_winer_team_id { nil }
+    toss_winer_team { nil }
     won_by_wicket { 1 }
     won_by_runs { 1 }
     match_draw_reason { "MyText" }

@@ -3,5 +3,5 @@ class MatchSerializer < ActiveModel::Serializer
   has_one :team1
   has_one :team2
   has_one :winner_team
-  has_one :toss_winer_team_id
+  has_one :toss_winer_team
 end
