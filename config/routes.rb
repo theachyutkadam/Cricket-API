@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :man_of_the_matches
   resources :overs
   resources :innings
   resources :matches
