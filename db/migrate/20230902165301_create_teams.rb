@@ -7,8 +7,8 @@ class CreateTeams < ActiveRecord::Migration[7.0]
       t.string :city
       t.string :location
       t.string :contact, null: false
-      t.references :captain, null: false, foreign_key: {to_table: :players}
-      t.references :vice_captain, null: true, foreign_key: {to_table: :players}
+      t.references :captain, null: false, foreign_key: { to_table: :players }
+      t.references :vice_captain, null: true, foreign_key: { to_table: :players }
 
       t.timestamps
     end

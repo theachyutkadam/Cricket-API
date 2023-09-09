@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ManOfTheMatchesController < ApplicationController
-  before_action :set_man_of_the_match, only: %i[ show update destroy ]
+  before_action :set_man_of_the_match, only: %i[show update destroy]
 
   # GET /man_of_the_matches
   def index
@@ -39,13 +41,14 @@ class ManOfTheMatchesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_man_of_the_match
-      @man_of_the_match = ManOfTheMatch.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def man_of_the_match_params
-      params.require(:man_of_the_match).permit(:inning_id, :reason, :player_id, :match_id, :team_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_man_of_the_match
+    @man_of_the_match = ManOfTheMatch.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def man_of_the_match_params
+    params.require(:man_of_the_match).permit(:inning_id, :reason, :player_id, :match_id, :team_id)
+  end
 end

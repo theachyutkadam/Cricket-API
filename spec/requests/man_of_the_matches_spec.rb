@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "ManOfTheMatches", type: :request do
   describe "GET /man_of_the_matches" do

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class GiftsController < ApplicationController
-  before_action :set_gift, only: %i[ show update destroy ]
+  before_action :set_gift, only: %i[show update destroy]
 
   # GET /gifts
   def index
@@ -39,13 +41,15 @@ class GiftsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gift
-      @gift = Gift.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def gift_params
-      params.require(:gift).permit(:inning_id, :reason, :player_id, :match_id, :team_id, :name_of_donner, :amount, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_gift
+    @gift = Gift.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def gift_params
+    params.require(:gift).permit(:inning_id, :reason, :player_id, :match_id, :team_id, :name_of_donner, :amount,
+                                 :description)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class OversController < ApplicationController
-  before_action :set_over, only: %i[ show update destroy ]
+  before_action :set_over, only: %i[show update destroy]
 
   # GET /overs
   def index
@@ -39,13 +41,15 @@ class OversController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_over
-      @over = Over.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def over_params
-      params.require(:over).permit(:real_ball_number, :run_type, :ball_status, :wicket_type, :strick_batsman_id, :non_strick_batsman_id, :bowler_id, :bowled_in_over, :total_runs, :over_number, :inning_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_over
+    @over = Over.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def over_params
+    params.require(:over).permit(:real_ball_number, :run_type, :ball_status, :wicket_type, :strick_batsman_id,
+                                 :non_strick_batsman_id, :bowler_id, :bowled_in_over, :total_runs, :over_number, :inning_id)
+  end
 end

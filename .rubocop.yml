@@ -84,7 +84,7 @@ Layout/ClosingParenthesisIndentation:
   Enabled: true
 
 Layout/MultilineMethodCallBraceLayout:
-  Enabled: true
+  EnforcedStyle: same_line
 
 Layout/SpaceAroundKeyword:
   Enabled: true
@@ -242,6 +242,8 @@ Style/TrailingCommaInArguments:
 Style/ClassAndModuleChildren:
   EnforcedStyle: nested
 
+Style/Documentation:
+  Enabled: false
 # Performance/FlatMap:
 #   Enabled: true
 

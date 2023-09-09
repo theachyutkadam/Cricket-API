@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class InningsController < ApplicationController
-  before_action :set_inning, only: %i[ show update destroy ]
+  before_action :set_inning, only: %i[show update destroy]
 
   # GET /innings
   def index
@@ -39,13 +41,15 @@ class InningsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inning
-      @inning = Inning.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def inning_params
-      params.require(:inning).permit(:match_id, :inning_type, :bat_team_id, :total_runs, :number_of_wickets, :start_at, :end_at, :target_to_opposition, :is_draw, :draw_reason, :first_umpire_id, :second_umpire_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inning
+    @inning = Inning.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def inning_params
+    params.require(:inning).permit(:match_id, :inning_type, :bat_team_id, :total_runs, :number_of_wickets, :start_at,
+                                   :end_at, :target_to_opposition, :is_draw, :draw_reason, :first_umpire_id, :second_umpire_id)
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PlayersController < ApplicationController
-  before_action :set_player, only: %i[ show update destroy ]
+  before_action :set_player, only: %i[show update destroy]
 
   # GET /players
   def index
@@ -39,13 +41,15 @@ class PlayersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_player
-      @player = Player.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def player_params
-      params.require(:player).permit(:first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :speciality, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_player
+    @player = Player.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def player_params
+    params.require(:player).permit(:first_name, :middle_name, :last_name, :contact, :gender, :birth_date,
+                                   :speciality, :user_id)
+  end
 end
