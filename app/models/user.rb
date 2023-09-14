@@ -20,12 +20,20 @@
 #  index_users_on_token  (token) UNIQUE
 #
 class User < ApplicationRecord
-	has_one :player, dependent: :destroy
+  has_one :player, dependent: :destroy
 
-	enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
-	enum user_type: { admin: 0, player: 1, other: 2 }, _default: "player"
-  
+  enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
+  enum user_type: { admin: 0, player: 1, other: 2 }, _default: "player"
+
   before_create :set_token
+
+  validates :email, :password, :token, presence: true
+  validates :is_admin, inclusion: [true, false]
+  validates :status, inclusion: { in: statuses.keys }
+  validates :contact, numericality: true, length: { is: 10 }
+  validates :user_id, :contact, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, length: { in: 6..16 }
 
   def generate_token
     user_token = Faker::Internet.device_token

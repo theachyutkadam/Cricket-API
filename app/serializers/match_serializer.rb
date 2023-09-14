@@ -10,6 +10,7 @@
 #  match_draw_reason  :text
 #  number_of_overs    :integer          not null
 #  start_at           :datetime
+#  status             :integer          not null
 #  toss_dicision      :integer          not null
 #  won_by_runs        :integer
 #  won_by_wicket      :integer

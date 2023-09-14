@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
     t.boolean "is_draw"
     t.datetime "start_at"
     t.datetime "end_at"
+    t.integer "status", null: false
     t.bigint "toss_winer_team_id", null: false
     t.integer "won_by_wicket"
     t.integer "won_by_runs"

@@ -29,7 +29,19 @@ class Player < ApplicationRecord
   belongs_to :user
 
   enum gender: { male: 0, female: 1, other: 2 }
-  enum speciality: { bowler: 0, batsman: 1, filder: 2,  }
+  enum speciality: { bowler: 0, batsman: 1, filder: 2 }
+
+  validates :birth_date,
+            :contact,
+            :first_name,
+            :gender,
+            :last_name,
+            :middle_name,
+            presence: true
+
+  validates :gender, inclusion: { in: genders.keys }
+  validates :contact, numericality: true, length: { is: 10 }
+  validates :user_id, :contact, uniqueness: true
 
   def full_name
     "#{first_name} #{last_name}"

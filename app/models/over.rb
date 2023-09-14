@@ -40,6 +40,13 @@ class Over < ApplicationRecord
   belongs_to :inning
 
   enum run_type: { no_run: 0, single_run: 1, double_run: 2, triple_run: 3, four: 4, five: 5, six: 6 }
-  enum ball_status: { wide: 0, no_ball: 1, dot_ball: 2, free_hit: 3}
-  enum wicket_type: { run_out: 0, bold: 1, catch: 2}
+  enum ball_status: { wide: 0, no_ball: 1, dot_ball: 2, free_hit: 3 }
+  enum wicket_type: { run_out: 0, bold: 1, catch: 2 }
+
+  validates :run_type, inclusion: { in: run_types.keys }
+  validates :ball_status, inclusion: { in: ball_statuses.keys }
+  validates :wicket_type, inclusion: { in: wicket_types.keys }
+
+  validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, presence: true
+  validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, numericality: { only_integer: true }
 end

@@ -10,6 +10,7 @@
 #  match_draw_reason  :text
 #  number_of_overs    :integer          not null
 #  start_at           :datetime
+#  status             :integer          not null
 #  toss_dicision      :integer          not null
 #  won_by_runs        :integer
 #  won_by_wicket      :integer
@@ -39,8 +40,14 @@ class Match < ApplicationRecord
   belongs_to :team2, class_name: "Team"
   belongs_to :winner_team, class_name: "Team"
   belongs_to :toss_winer_team, class_name: "Team"
-
   has_many :innings, dependent: :destroy
 
-  enum toss_dicision: { bating: 0, filding: 1}
+  enum toss_dicision: { bating: 0, filding: 1 }
+  enum status: { active: 0, pending: 1, finished: 2, draw: 3 }, _default: "active"
+
+  validates :number_of_overs, :start_at, presence: true
+  validates :status, inclusion: { in: statuses.keys }
+  validates :is_draw, inclusion: [true, false]
+  validates :toss_dicision, inclusion: { in: toss_dicisions.keys }
+  validates :number_of_overs, :won_by_runs, :won_by_wicket, numericality: { only_integer: true }
 end

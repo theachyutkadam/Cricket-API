@@ -8,6 +8,7 @@ class CreateMatches < ActiveRecord::Migration[7.0]
       t.boolean :is_draw
       t.datetime :start_at
       t.datetime :end_at
+      t.integer :status, null: false
       t.references :toss_winer_team, null: false, foreign_key: { to_table: :teams }
       t.integer :won_by_wicket
       t.integer :won_by_runs

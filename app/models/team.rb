@@ -29,8 +29,10 @@
 class Team < ApplicationRecord
   belongs_to :captain, class_name: "Player"
   belongs_to :vice_captain, class_name: "Player", optional: true
-
   has_many :matches, dependent: :destroy
 
   enum status: { active: 0, pending: 1, blocked: 2 }, _default: "active"
+
+  validates :city, :contact, :location, :name, presence: true
+  validates :status, inclusion: { in: statuses.keys }
 end

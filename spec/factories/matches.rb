@@ -10,6 +10,7 @@
 #  match_draw_reason  :text
 #  number_of_overs    :integer          not null
 #  start_at           :datetime
+#  status             :integer          not null
 #  toss_dicision      :integer          not null
 #  won_by_runs        :integer
 #  won_by_wicket      :integer
@@ -38,8 +39,9 @@ FactoryBot.define do
   factory :match do
     # team1 { nil }
     # team2 { nil }
-    number_of_overs { [5,10,15,20,50].sample }
+    number_of_overs { [5, 10, 15, 20, 50].sample }
     # winner_team { nil }
+    status { Match.statuses.keys.sample }
     is_draw { false }
     start_at { Faker::Date.forward(days: 1) }
     end_at { Faker::Date.forward(days: 1) }
