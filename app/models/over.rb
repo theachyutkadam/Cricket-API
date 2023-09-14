@@ -38,4 +38,8 @@ class Over < ApplicationRecord
   belongs_to :non_strick_batsman, class_name: "Player"
   belongs_to :bowler, class_name: "Player"
   belongs_to :inning
+
+  enum run_type: { no_run: 0, single_run: 1, double_run: 2, triple_run: 3, four: 4, five: 5, six: 6 }
+  enum ball_status: { wide: 0, no_ball: 1, dot_ball: 2, free_hit: 3}
+  enum wicket_type: { run_out: 0, bold: 1, catch: 2}
 end

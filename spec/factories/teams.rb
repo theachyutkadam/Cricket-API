@@ -28,13 +28,13 @@
 #
 FactoryBot.define do
   factory :team do
-    name { "MyString" }
-    status { 1 }
+    name { Faker::Movie.title }
+    status { Team.statuses.keys.sample }
     state { "MyString" }
-    city { "MyString" }
-    location { "MyString" }
-    contact { "MyString" }
-    captain { nil }
-    vice_captain { nil }
+    city { Faker::Address.city }
+    location { Faker::Address.street_address }
+    contact { Faker::Base.numerify("##########") }
+    # captain { nil }
+    # vice_captain { nil }
   end
 end

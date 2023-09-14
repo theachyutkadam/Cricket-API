@@ -21,11 +21,11 @@
 #
 FactoryBot.define do
   factory :user do
-    password { "MyString" }
-    email { "MyString" }
-    status { 1 }
+    password { "123456" }
+    email { Faker::Internet.email }
+    status { User.statuses.keys.sample }
     is_admin { false }
-    token { "MyString" }
-    user_type { 1 }
+    token { Faker::Internet.device_token }
+    user_type { User.user_types.keys.sample }
   end
 end

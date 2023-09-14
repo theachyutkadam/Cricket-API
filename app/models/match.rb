@@ -41,4 +41,6 @@ class Match < ApplicationRecord
   belongs_to :toss_winer_team, class_name: "Team"
 
   has_many :innings, dependent: :destroy
+
+  enum toss_dicision: { bating: 0, filding: 1}
 end

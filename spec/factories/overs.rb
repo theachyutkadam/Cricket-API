@@ -35,16 +35,16 @@
 #
 FactoryBot.define do
   factory :over do
-    real_ball_number { 1 }
-    run_type { 1 }
-    ball_status { 1 }
-    wicket_type { 1 }
-    strick_batsman { nil }
-    non_strick_batsman { nil }
-    bowler { nil }
-    bowled_in_over { 1 }
-    total_runs { 1 }
-    over_number { 1 }
-    inning { nil }
+    # real_ball_number { 1 }
+    run_type { Over.run_types.keys.sample }
+    ball_status { Over.ball_statuses.keys.sample }
+    wicket_type { Over.wicket_types.keys.sample }
+    # strick_batsman { nil }
+    # non_strick_batsman { nil }
+    # bowler { nil }
+    # bowled_in_over { 1 }
+    # total_runs { 1 }
+    # over_number { 1 }
+    # inning { nil }
   end
 end

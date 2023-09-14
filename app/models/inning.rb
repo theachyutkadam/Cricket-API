@@ -41,4 +41,6 @@ class Inning < ApplicationRecord
   belongs_to :second_umpire, class_name: "Player"
 
   has_many :overs, dependent: :destroy
+
+  enum inning_type: { first: 0, second: 1 }
 end

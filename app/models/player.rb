@@ -27,4 +27,11 @@
 #
 class Player < ApplicationRecord
   belongs_to :user
+
+  enum gender: { male: 0, female: 1, other: 2 }
+  enum speciality: { bowler: 0, batsman: 1, filder: 2,  }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
