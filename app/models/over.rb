@@ -39,14 +39,48 @@ class Over < ApplicationRecord
   belongs_to :bowler, class_name: "Player"
   belongs_to :inning
 
-  enum run_type: { no_run: 0, single_run: 1, double_run: 2, triple_run: 3, four: 4, five: 5, six: 6 }
-  enum ball_status: { wide: 0, no_ball: 1, dot_ball: 2, free_hit: 3 }
-  enum wicket_type: { run_out: 0, bold: 1, catch: 2 }
+  enum run_type: { no_run: 0, single_run: 1, double_run: 2, triple_run: 3, four: 4, five: 5, six: 6 }, _default: "no_run"
+  enum ball_status: { good_ball: 0, wide: 1, no_ball: 2, dot_ball: 3, free_hit: 4 }, _default: "good_ball"
+  enum wicket_type: { run_out: 0, bold: 1, catch: 2, lbw: 3 }
 
   validates :run_type, inclusion: { in: run_types.keys }
   validates :ball_status, inclusion: { in: ball_statuses.keys }
   validates :wicket_type, inclusion: { in: wicket_types.keys }
-
   validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, presence: true
   validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, numericality: { only_integer: true }
+  validate :is_over_finished?
+  before_validation :update_over_status
+
+  def is_over_finished?
+    fetch_last_record
+    errors.add(:real_ball_number, "Over Completed") if @last_record.real_ball_number == 6
+  end
+
+  def update_score
+    self.total_runs = @last_record.total_runs + 1 if self.ball_status != 0
+    self.total_runs = @last_record.total_runs + self.run_type
+  end
+
+  def update_over_status
+    return if @last_record.blank?
+
+    update_over
+    self.bowled_in_over = @last_record.bowled_in_over + 1
+    self.bowled_in_over = 1 if self.over_number != @last_record.over_number
+
+    if self.ball_status == 0 || self.wicket_type.present?
+      self.real_ball_number = @last_record.real_ball_number + 1
+      self.ball_status = 0
+    end
+    update_score
+  end
+
+  def update_over
+    return self.over_number = @last_record.over_number + 1 if @last_record.real_ball_number == 6
+    self.over_number = @last_record.over_number
+  end
+
+  def fetch_last_record
+    @last_record = Over.where(inning_id: self.inning_id).order("created_at").last
+  end
 end
