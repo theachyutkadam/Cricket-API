@@ -52,35 +52,36 @@ class Over < ApplicationRecord
   before_validation :update_over_status
 
   def is_over_finished?
-    fetch_last_record
-    errors.add(:real_ball_number, "Over Completed") if @last_record.real_ball_number == 6
+    fetch_last_ball_record
+    errors.add(:real_ball_number, "Over Completed") if @last_ball_record.real_ball_number == 6
   end
 
   def update_score
-    self.total_runs = @last_record.total_runs + 1 if self.ball_status != 0
-    self.total_runs = @last_record.total_runs + self.run_type
+    self.total_runs = @last_ball_record.total_runs + 1 if self.ball_status == 1
+    self.total_runs = @last_ball_record.total_runs + self.run_type
   end
 
   def update_over_status
-    return if @last_record.blank?
+    fetch_last_ball_record
+    return if @last_ball_record.blank?
 
     update_over
-    self.bowled_in_over = @last_record.bowled_in_over + 1
-    self.bowled_in_over = 1 if self.over_number != @last_record.over_number
+    self.bowled_in_over = @last_ball_record.bowled_in_over + 1
+    self.bowled_in_over = 1 if self.over_number != @last_ball_record.over_number
 
     if self.ball_status == 0 || self.wicket_type.present?
-      self.real_ball_number = @last_record.real_ball_number + 1
+      self.real_ball_number = @last_ball_record.real_ball_number + 1
       self.ball_status = 0
     end
     update_score
   end
 
   def update_over
-    return self.over_number = @last_record.over_number + 1 if @last_record.real_ball_number == 6
-    self.over_number = @last_record.over_number
+    return self.over_number = @last_ball_record.over_number + 1 if @last_ball_record.real_ball_number == 6
+    self.over_number = @last_ball_record.over_number
   end
 
-  def fetch_last_record
-    @last_record = Over.where(inning_id: self.inning_id).order("created_at").last
+  def fetch_last_ball_record
+    @last_ball_record = Over.where(inning_id: self.inning_id).order("created_at").last
   end
 end
