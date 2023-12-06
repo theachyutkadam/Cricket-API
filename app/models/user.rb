@@ -30,8 +30,6 @@ class User < ApplicationRecord
   validates :email, :password, :token, presence: true
   validates :is_admin, inclusion: [true, false]
   validates :status, inclusion: { in: statuses.keys }
-  validates :contact, numericality: true, length: { is: 10 }
-  validates :user_id, :contact, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { in: 6..16 }
 

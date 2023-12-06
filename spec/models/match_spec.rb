@@ -19,7 +19,7 @@
 #  team1_id           :bigint           not null
 #  team2_id           :bigint           not null
 #  toss_winer_team_id :bigint           not null
-#  winner_team_id     :bigint           not null
+#  winner_team_id     :bigint
 #
 # Indexes
 #

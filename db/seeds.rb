@@ -8,24 +8,23 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-10.times do |counter|
+80.times do |counter|
   user = FactoryBot.create(:user)
+  p "============user created #{counter}"
   FactoryBot.create(:player, user: user)
 end
 
-10.times do |counter|
-  team = FactoryBot.create(:team)
-  FactoryBot.create(:player, captain: User.find(counter))
+6.times do |counter|
+  captain = Player.all.sample
+  team = FactoryBot.create(:team, captain: captain)
+  p "============team created #{counter}"
 end
 
-match1 = FactoryBot.create(:match,
-  team1: Team.last,
-  team2: Team.first,
-  toss_winer_team: Team.last
-)
-
-match2 = FactoryBot.create(:match,
-  team1: Team.last,
-  team2: Team.first,
-  toss_winer_team: Team.last
-)
+3.times do |counter|
+  match = FactoryBot.create(:match,
+    team1: Team.all.sample,
+    team2: Team.all.sample,
+    toss_winer_team: Team.all.sample
+  )
+  p "============match created #{counter}"
+end

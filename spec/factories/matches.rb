@@ -19,7 +19,7 @@
 #  team1_id           :bigint           not null
 #  team2_id           :bigint           not null
 #  toss_winer_team_id :bigint           not null
-#  winner_team_id     :bigint           not null
+#  winner_team_id     :bigint
 #
 # Indexes
 #
@@ -46,8 +46,8 @@ FactoryBot.define do
     start_at { Faker::Date.forward(days: 1) }
     end_at { Faker::Date.forward(days: 1) }
     # toss_winer_team { nil }
-    # won_by_wicket { 1 }
-    # won_by_runs { 1 }
+    won_by_wicket { 1 }
+    won_by_runs { 1 }
     match_draw_reason { "MyText" }
     toss_dicision { Match.toss_dicisions.keys.sample }
   end

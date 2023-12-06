@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
     t.bigint "team1_id", null: false
     t.bigint "team2_id", null: false
     t.integer "number_of_overs", null: false
-    t.bigint "winner_team_id", null: false
+    t.bigint "winner_team_id"
     t.boolean "is_draw"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -89,16 +89,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
   end
 
   create_table "overs", force: :cascade do |t|
-    t.integer "real_ball_number", null: false
+    t.integer "real_ball_number", default: 1, null: false
     t.integer "run_type"
     t.integer "ball_status", null: false
     t.integer "wicket_type"
     t.bigint "strick_batsman_id", null: false
     t.bigint "non_strick_batsman_id", null: false
     t.bigint "bowler_id", null: false
-    t.integer "bowled_in_over"
-    t.integer "total_runs", null: false
-    t.integer "over_number", null: false
+    t.integer "bowled_in_over", default: 1
+    t.integer "total_runs", default: 0, null: false
+    t.integer "over_number", default: 1, null: false
     t.bigint "inning_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -19,7 +19,7 @@
 #  team1_id           :bigint           not null
 #  team2_id           :bigint           not null
 #  toss_winer_team_id :bigint           not null
-#  winner_team_id     :bigint           not null
+#  winner_team_id     :bigint
 #
 # Indexes
 #
@@ -38,7 +38,7 @@
 class Match < ApplicationRecord
   belongs_to :team1, class_name: "Team"
   belongs_to :team2, class_name: "Team"
-  belongs_to :winner_team, class_name: "Team"
+  belongs_to :winner_team, class_name: "Team", optional: true
   belongs_to :toss_winer_team, class_name: "Team"
   has_many :innings, dependent: :destroy
 
