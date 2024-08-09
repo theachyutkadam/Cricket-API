@@ -20,5 +20,5 @@
 #  index_users_on_token  (token) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :password, :email, :status, :is_admin, :token, :user_type
+  attributes :id, :email, :status, :is_admin, :user_type
 end

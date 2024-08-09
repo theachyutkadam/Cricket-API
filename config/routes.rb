@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   resources :matches
   resources :teams
   resources :players
-  resources :users
+
+  resources :users do
+    # get "onboarding", on: :collection
+    get "logout", on: :collection
+    post "login", on: :collection
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
   root "application#health"
 end

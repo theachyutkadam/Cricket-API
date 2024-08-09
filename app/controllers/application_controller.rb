@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  # before_action :authenticate_user!, except: [:health]
+  before_action :authenticate_user!, except: [:health]
 
   def current_user
     @login_user
@@ -13,7 +13,8 @@ class ApplicationController < ActionController::API
 
   def health
     records = ApplicationRecord.record_count
-    render json: { count: records, message: "Good Helth" }
+    active_users = User.active.first(10).pluck(:email)
+    render json: { message: "Good Helth", count: records, active_users: }
   end
 
   def pagination(object)
@@ -29,9 +30,6 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
-    Rails.logger.debug "+++++++++++++++++"
-    Rails.logger.debug request.headers["authorization"]
-    Rails.logger.debug "+++++++++++++++++"
     if request.headers["authorization"]
       return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 

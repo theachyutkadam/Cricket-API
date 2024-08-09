@@ -28,4 +28,10 @@ FactoryBot.define do
     token { Faker::Internet.device_token }
     user_type { User.user_types.keys.sample }
   end
+
+  trait :with_player do
+    after(:create) do |user|
+      create(:player, user_id: user.id)
+    end
+  end
 end

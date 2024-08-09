@@ -25,7 +25,7 @@ class User < ApplicationRecord
   enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
   enum user_type: { admin: 0, player: 1, other: 2 }, _default: "player"
 
-  before_create :set_token
+  # before_save :set_token
 
   validates :email, :password, :token, presence: true
   validates :is_admin, inclusion: [true, false]
@@ -40,6 +40,7 @@ class User < ApplicationRecord
   end
 
   def set_token
+    puts "============set token===="
     self.token = generate_token
   end
 end

@@ -34,5 +34,6 @@ FactoryBot.define do
     gender { Player.genders.keys.sample }
     birth_date { 18.years.ago }
     speciality { Player.specialities.keys.sample }
+    user nil
   end
 end

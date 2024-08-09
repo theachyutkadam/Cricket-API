@@ -49,6 +49,6 @@ class ManOfTheMatchesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def man_of_the_match_params
-    params.require(:man_of_the_match).permit(:inning_id, :reason, :player_id, :match_id, :team_id)
+    params.permit(:inning_id, :reason, :player_id, :match_id, :team_id)
   end
 end

@@ -39,16 +39,17 @@ FactoryBot.define do
   factory :match do
     # team1 { nil }
     # team2 { nil }
-    number_of_overs { [5, 10, 15, 20, 50].sample }
     # winner_team { nil }
+    # toss_winer_team { nil }
+    number_of_overs { [5, 10, 15, 20].sample }
     status { Match.statuses.keys.sample }
     is_draw { false }
     start_at { Faker::Date.forward(days: 1) }
-    end_at { Faker::Date.forward(days: 1) }
-    # toss_winer_team { nil }
-    won_by_wicket { 1 }
-    won_by_runs { 1 }
-    match_draw_reason { "MyText" }
-    toss_dicision { Match.toss_dicisions.keys.sample }
+    end_at { Faker::Date.forward(days: 1) if status == 'finished' || status == 'draw'}
+    # won_by_wicket { 1 }
+    # won_by_runs { 1 }
+    match_draw_reason { "none" }
+    toss_dicision { 0 }
+    # toss_dicision { Match.toss_dicisions.keys.sample }
   end
 end
