@@ -6,9 +6,9 @@
 #
 #  id                    :bigint           not null, primary key
 #  ball_status           :integer          not null
-#  bowled_in_over        :integer          default(1)
-#  over_number           :integer          default(1), not null
-#  real_ball_number      :integer          default(1), not null
+#  bowled_in_over        :integer          default(0)
+#  over_number           :integer          default(0), not null
+#  real_ball_number      :integer          default(0), not null
 #  run_type              :integer
 #  total_runs            :integer          default(0), not null
 #  wicket_type           :integer

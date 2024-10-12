@@ -12,8 +12,8 @@
 #  start_at           :datetime
 #  status             :integer          not null
 #  toss_dicision      :integer          not null
-#  won_by_runs        :integer
-#  won_by_wicket      :integer
+#  won_by_runs        :integer          default(0)
+#  won_by_wicket      :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  team1_id           :bigint           not null

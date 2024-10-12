@@ -12,8 +12,8 @@
 #  start_at           :datetime
 #  status             :integer          not null
 #  toss_dicision      :integer          not null
-#  won_by_runs        :integer
-#  won_by_wicket      :integer
+#  won_by_runs        :integer          default(0)
+#  won_by_wicket      :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  team1_id           :bigint           not null
@@ -50,4 +50,7 @@ class Match < ApplicationRecord
   validates :is_draw, inclusion: [true, false]
   validates :toss_dicision, inclusion: { in: toss_dicisions.keys }
   validates :number_of_overs, :won_by_runs, :won_by_wicket, numericality: { only_integer: true }
+  validates :team1, exclusion: { in: lambda{ |match| [match.team2] }, msg: "Team2 must be different form Team1" }
+  # validates_with ValuesNotEqualValidator, fields: [:team1, :team2], msg: "Team2 must be different form Team1"
+
 end

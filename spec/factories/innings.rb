@@ -41,7 +41,7 @@ FactoryBot.define do
     # bat_team { nil }
     # total_runs { 1 }
     # number_of_wickets { "MyString" }
-    start_at { DateTime.today }
+    start_at { DateTime.now }
     # end_at { DateTime.today }
     # target_to_opposition { "MyString" }
     # is_draw { 1 }

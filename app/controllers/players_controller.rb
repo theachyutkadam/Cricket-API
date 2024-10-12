@@ -5,9 +5,9 @@ class PlayersController < ApplicationController
 
   # GET /players
   def index
-    @players = Player.all
+    @players = Player.last(10)
 
-    render json: @players
+    render json: @players.as_json()
   end
 
   # GET /players/1
@@ -17,14 +17,7 @@ class PlayersController < ApplicationController
 
   # POST /players
   def create
-    p "--------------------"
-    p player_params
-    p "--------------------"
     @player = Player.new(player_params)
-    p @player
-    p @player.errors
-    p "--------------------"
-
     if @player.save
       render json: @player, status: :created, location: @player
     else

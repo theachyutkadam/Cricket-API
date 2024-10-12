@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.last(10)
 
-    render json: @users
+    render json: @users.as_json()
   end
 
   # GET /users/1
