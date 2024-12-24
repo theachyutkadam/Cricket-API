@@ -5,9 +5,9 @@ class PlayersController < ApplicationController
 
   # GET /players
   def index
-    @players = Player.last(10)
+    @players = Player.all
 
-    render json: @players.as_json()
+    render json: @players
   end
 
   # GET /players/1

@@ -8,9 +8,9 @@
 #  birth_date  :date
 #  contact     :string           not null
 #  first_name  :string           not null
-#  gender      :integer          not null
 #  last_name   :string           not null
 #  middle_name :string
+#  gender      :integer          not null
 #  speciality  :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -26,6 +26,16 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PlayerSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :middle_name, :last_name, :contact, :gender, :birth_date, :speciality
+  attributes :id, :contact, :gender, :birth_date, :speciality, :name, :first_name, :last_name, :middle_name
   has_one :user
+
+  def name
+    object.full_name
+  rescue StandardError
+    nil
+  end
+
+  # def user
+  #   object.user
+  # end
 end
