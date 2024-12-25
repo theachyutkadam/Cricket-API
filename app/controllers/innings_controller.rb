@@ -49,7 +49,7 @@ class InningsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def inning_params
-    params.permit(:match_id, :inning_type, :bat_team_id, :total_runs, :number_of_wickets, :start_at,
+    params.require(:inning).permit(:match_id, :inning_type, :bat_team_id, :total_runs, :number_of_wickets, :start_at,
                                    :end_at, :target_to_opposition, :is_draw, :draw_reason, :first_umpire_id, :second_umpire_id)
   end
 end

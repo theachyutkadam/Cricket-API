@@ -6,19 +6,23 @@
 #
 #  id         :bigint           not null, primary key
 #  email      :string           not null
-#  is_admin   :boolean
 #  password   :string           not null
 #  status     :integer          not null
 #  token      :string           not null
-#  user_type  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  role_id    :bigint           not null
 #
 # Indexes
 #
-#  index_users_on_email  (email) UNIQUE
-#  index_users_on_token  (token) UNIQUE
+#  index_users_on_email    (email) UNIQUE
+#  index_users_on_role_id  (role_id)
+#  index_users_on_token    (token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (role_id => roles.id)
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :status, :is_admin, :user_type
+  attributes :id, :email, :status
 end

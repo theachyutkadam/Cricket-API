@@ -49,7 +49,7 @@ class OversController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def over_params
-    params.permit(:real_ball_number, :run_type, :ball_status, :wicket_type, :strick_batsman_id,
+    params.require(:over).permit(:real_ball_number, :run_type, :ball_status, :wicket_type, :strick_batsman_id,
                                  :non_strick_batsman_id, :bowler_id, :bowled_in_over, :total_runs, :over_number, :inning_id)
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :roles
   resources :gifts
   resources :man_of_the_matches
   resources :overs

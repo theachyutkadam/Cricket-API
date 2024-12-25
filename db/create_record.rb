@@ -1,9 +1,32 @@
 # frozen_string_literal: true
 
+def start_seed
+  Role.any? ? create_viwers : create_role
+end
+
+def create_role
+  Role.create([
+    {name: 'admin'},
+    {name: 'player'},
+    {name: 'viwer'}
+  ])
+
+  FactoryBot.create(:user, role_id: 1)
+  create_viwers
+end
+
+def create_viwers
+  80.times do |counter|
+    FactoryBot.create(:user, role_id: 3)
+    p "============Viwer created #{counter}"
+  end
+  create_players
+end
+
 def create_players
   80.times do |counter|
-    FactoryBot.create(:user, :with_player)
-    p "============user created #{counter}"
+    FactoryBot.create(:user, :with_player, role_id: 2)
+    p "============Player created #{counter}"
   end
   create_teams
 end
@@ -13,13 +36,12 @@ def create_teams
     captain = Player.all.sample
     team = FactoryBot.create(:team, captain: captain)
     p "============team created #{counter}"
-    p "============team #{team.inspect}"
   end
   create_match
 end
 
 def create_match
-  3.times do |counter|
+  5.times do |counter|
     team1 = Team.all.sample
     team2 = Team.all.sample
     match = FactoryBot.build(:match,
@@ -29,7 +51,6 @@ def create_match
     )
     p "============match created #{match.valid?}"
     match.save
-    p "============match #{match.inspect}"
     create_inning(match)
   end
 end

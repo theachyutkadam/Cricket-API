@@ -7,7 +7,7 @@ require_relative "./create_record"
 puts "Seeding..."
 start_time = Time.zone.now
 
-create_players # create data from another file.
+start_seed # create data from another file.
 
 end_time = Time.zone.now
 puts "Seeding done from #{start_time} to #{end_time}."

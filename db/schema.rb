@@ -123,6 +123,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.integer "status"
@@ -142,12 +149,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
     t.string "password", null: false
     t.string "email", null: false
     t.integer "status", null: false
-    t.boolean "is_admin"
     t.string "token", null: false
-    t.integer "user_type"
+    t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
@@ -174,4 +181,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
   add_foreign_key "players", "users"
   add_foreign_key "teams", "players", column: "captain_id"
   add_foreign_key "teams", "players", column: "vice_captain_id"
+  add_foreign_key "users", "roles"
 end

@@ -52,5 +52,4 @@ class Match < ApplicationRecord
   validates :number_of_overs, :won_by_runs, :won_by_wicket, numericality: { only_integer: true }
   validates :team1, exclusion: { in: lambda{ |match| [match.team2] }, msg: "Team2 must be different form Team1" }
   # validates_with ValuesNotEqualValidator, fields: [:team1, :team2], msg: "Team2 must be different form Team1"
-
 end

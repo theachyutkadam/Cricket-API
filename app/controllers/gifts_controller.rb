@@ -49,7 +49,7 @@ class GiftsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def gift_params
-    params.permit(:inning_id, :reason, :player_id, :match_id, :team_id, :name_of_donner, :amount,
+    params.require(:gift).permit(:inning_id, :reason, :player_id, :match_id, :team_id, :name_of_donner, :amount,
                                  :description)
   end
 end
