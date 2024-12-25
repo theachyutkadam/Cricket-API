@@ -37,7 +37,8 @@
 #
 class MatchSerializer < ActiveModel::Serializer
   attributes :id, :number_of_overs, :status, :is_draw, :start_at, :end_at, :won_by_wicket, :won_by_runs, :match_draw_reason,
-             :toss_dicision
+             :toss_dicision, :team1_id, :team2_id, :winner_team_id, :toss_winer_team_id
+
   has_one :team1
   has_one :team2
   has_one :winner_team
