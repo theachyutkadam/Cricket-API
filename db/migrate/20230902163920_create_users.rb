@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password, null: false
       t.string :email, null: false, index: { unique: true }
       t.integer :status, null: false
-      t.string :token, null: false, index: { unique: true }
+      t.string :token, null: true, index: { unique: true }
       t.references :role, null: false, foreign_key: true
 
       t.timestamps

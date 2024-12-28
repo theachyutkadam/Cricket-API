@@ -149,7 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_165323) do
     t.string "password", null: false
     t.string "email", null: false
     t.integer "status", null: false
-    t.string "token", null: false
+    t.string "token"
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

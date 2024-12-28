@@ -8,7 +8,7 @@
 #  email      :string           not null
 #  password   :string           not null
 #  status     :integer          not null
-#  token      :string           not null
+#  token      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  role_id    :bigint           not null

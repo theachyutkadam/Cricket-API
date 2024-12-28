@@ -27,7 +27,7 @@
 #  fk_rails_...  (vice_captain_id => players.id)
 #
 class TeamSerializer < ActiveModel::Serializer
-  attributes :id, :name, :status, :state, :city, :location, :contact
+  attributes :id, :name, :status, :state, :city, :location, :contact, :captain_id, :vice_captain_id
   has_one :captain
   has_one :vice_captain
 end

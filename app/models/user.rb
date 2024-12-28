@@ -8,7 +8,7 @@
 #  email      :string           not null
 #  password   :string           not null
 #  status     :integer          not null
-#  token      :string           not null
+#  token      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  role_id    :bigint           not null
@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_one :player, dependent: :destroy
   enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
 
-  # before_save :set_token
+  before_save :set_role
 
   validates :email, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -49,5 +49,9 @@ class User < ApplicationRecord
 
   def set_token
     self.token = generate_token
+  end
+
+  def set_role
+    self.role_id = Role.where(name: "viwer") unless self.role_id
   end
 end

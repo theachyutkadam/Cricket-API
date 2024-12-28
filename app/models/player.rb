@@ -36,7 +36,6 @@ class Player < ApplicationRecord
             :first_name,
             :gender,
             :last_name,
-            :middle_name,
             presence: true
 
   validates :gender, inclusion: { in: genders.keys }
