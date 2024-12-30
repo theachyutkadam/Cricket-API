@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
+  before_action :check_status, only: %i[index]
   before_action :set_match, only: %i[show update destroy]
 
   # GET /matches
-  def index
-    @matches = Match.all
-
+  def index status = "upcomming"
+    if @status.empty?
+      @matches = Match.all
+    else
+      @matches = Match.where(status: @status)
+    end
     render json: @matches
   end
 
@@ -45,6 +49,10 @@ class MatchesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_match
     @match = Match.find(params[:id])
+  end
+
+  def check_status
+    @status = params[:status]
   end
 
   # Only allow a list of trusted parameters through.

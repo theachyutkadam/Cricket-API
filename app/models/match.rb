@@ -43,7 +43,7 @@ class Match < ApplicationRecord
   has_many :innings, dependent: :destroy
 
   enum toss_dicision: { bating: 0, filding: 1 }
-  enum status: { active: 0, pending: 1, finished: 2, draw: 3 }, _default: "pending"
+  enum status: { active: 0, upcomming: 1, finished: 2, draw: 3 }, _default: "upcomming"
 
   validates :number_of_overs, :start_at, presence: true
   validates :status, inclusion: { in: statuses.keys }

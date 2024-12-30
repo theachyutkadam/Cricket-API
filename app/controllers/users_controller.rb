@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.last(10)
+    @users = User.players
 
     render json: @users.as_json()
   end
@@ -22,17 +22,16 @@ class UsersController < ApplicationController
     @user.set_token
 
     if @user.save
-      puts "record created"
-      render json: @user, status: :created, location: @user
+      render json: {user: @user, status: 201}, location: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: {errors: @user.errors.full_messages[0], status: 409}
     end
   end
 
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: @user, status: 201
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -42,7 +41,6 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
   end
-
 
   def login
     @user = User.find_by(email: params[:email])
@@ -59,7 +57,7 @@ class UsersController < ApplicationController
         user_details: {
           user_id: @user.id,
           email: @user.email,
-          full_name: @user.player ? @user.player.full_name : ''
+          # full_name: @user.player ? @user.player.full_name : ''
         },
         status: 200,
       }

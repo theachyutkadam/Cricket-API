@@ -28,15 +28,19 @@ class User < ApplicationRecord
   has_one :player, dependent: :destroy
   enum status: { active: 0, pending: 1, blocked: 2, deleted: 3 }, _default: "active"
 
-  before_save :set_role
+  before_validation :set_role
 
   validates :email, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :email, uniqueness: true
   validates :status, inclusion: { in: statuses.keys }
-  validates :password, length: { in: 6..16 }
+  validates :password, length: { in: 6..12 }
   validate :is_single_admin
 
+  scope :players, -> { where(:role_id => Role.where(name: "player").first.id)}
+  scope :viwers, -> { where(:role_id => Role.where(name: "viwer").first.id)}
+  scope :admins, -> { where(:role_id => Role.where(name: "admin").first.id)}
+  # Ex:- scope :active, -> {where(:active => true)}
   def is_single_admin
     errors.add(:role_id, "Only one Admin Role allowed") if User.where(role_id: self.role_id == 1).any?
   end
@@ -52,6 +56,7 @@ class User < ApplicationRecord
   end
 
   def set_role
-    self.role_id = Role.where(name: "viwer") unless self.role_id
+    self.role = Role.where(name: "viwer").first unless self.role_id
   end
+
 end

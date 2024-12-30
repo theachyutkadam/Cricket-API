@@ -49,6 +49,7 @@ class Over < ApplicationRecord
   validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, presence: true
   validates :bowled_in_over, :over_number, :real_ball_number, :total_runs, numericality: { only_integer: true }
   validate :is_over_finished?
+
   before_validation :update_over_status
 
   def is_over_finished?

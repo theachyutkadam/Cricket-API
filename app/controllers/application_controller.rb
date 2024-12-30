@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
 
   def health
     records = ApplicationRecord.record_count
-    active_users = User.active.first(10).pluck(:email)
+    active_users = User.players.active.first(10).pluck(:email)
     render json: { message: "Good Helth", count: records, active_users: }
   end
 
