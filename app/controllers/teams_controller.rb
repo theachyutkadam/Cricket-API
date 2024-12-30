@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
+  before_action :order_by, only: %i[index]
   before_action :set_team, only: %i[show update destroy]
 
   # GET /teams
   def index
-    @teams = Team.all
+    @teams = Team.order("#{@order_by} #{@order}")
 
     render json: @teams
   end
@@ -45,6 +46,10 @@ class TeamsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
+  end
+  def order_by
+    @order_by = params[:order_by] ? params[:order_by] : 'id'
+    @order = params[:order] ?  params[:order] : 'asc'
   end
 
   # Only allow a list of trusted parameters through.
