@@ -7,9 +7,9 @@ class MatchesController < ApplicationController
   # GET /matches
   def index status = "upcomming"
     if @status.empty?
-      @matches = Match.all
+      @matches = Match.order("#{@order_by} #{@order}")
     else
-      @matches = Match.where(status: @status)
+      @matches = Match.where(status: @status).order("#{@order_by} #{@order}")
     end
     render json: @matches
   end

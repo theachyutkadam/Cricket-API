@@ -30,6 +30,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user!
+    order_by
     # if request.headers["authorization"]
     #   return render json: { errors: "Invalid token" }, status: :unauthorized unless find_user
 
@@ -41,5 +42,10 @@ class ApplicationController < ActionController::API
 
   def find_user
     @login_user = User.find_by(token: request.headers["authorization"])
+  end
+
+  def order_by
+    @order_by = params[:order_by] ? params[:order_by] : 'id'
+    @order = params[:order] ?  params[:order] : 'asc'
   end
 end

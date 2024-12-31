@@ -47,10 +47,6 @@ class TeamsController < ApplicationController
   def set_team
     @team = Team.find(params[:id])
   end
-  def order_by
-    @order_by = params[:order_by] ? params[:order_by] : 'id'
-    @order = params[:order] ?  params[:order] : 'asc'
-  end
 
   # Only allow a list of trusted parameters through.
   def team_params
