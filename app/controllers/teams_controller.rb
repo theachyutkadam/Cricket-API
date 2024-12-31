@@ -7,9 +7,10 @@ class TeamsController < ApplicationController
   # GET /teams
   def index status = "active"
     if @status.empty?
-      @teams = Team.order("#{@order_by} #{@order}")
+      # @teams = Team.order("#{@order_by} #{@order}")
+      @teams = Team.includes(:captain, :vice_captain).order("#{@order_by} #{@order}")
     else
-      @teams = Team.where(status: @status).order("#{@order_by} #{@order}")
+      @teams = Team.includes(:captain, :vice_captain).where(status: @status).order("#{@order_by} #{@order}")
     end
     render json: @teams
   end

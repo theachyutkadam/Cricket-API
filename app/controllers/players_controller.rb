@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
 
   # GET /players
   def index
-    @players = Player.all
+    @players = Player.includes(:user)
 
     render json: @players
   end

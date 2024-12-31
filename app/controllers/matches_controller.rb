@@ -7,9 +7,9 @@ class MatchesController < ApplicationController
   # GET /matches
   def index status = "upcomming"
     if @status.empty?
-      @matches = Match.order("#{@order_by} #{@order}")
+      @matches = Match.includes(:team1, :team2, :winner_team, :toss_winer_team).order("#{@order_by} #{@order}")
     else
-      @matches = Match.where(status: @status).order("#{@order_by} #{@order}")
+      @matches = Match.includes(:team1, :team2, :winner_team, :toss_winer_team).where(status: @status).order("#{@order_by} #{@order}")
     end
     render json: @matches
   end
