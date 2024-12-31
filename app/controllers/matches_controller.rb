@@ -52,7 +52,7 @@ class MatchesController < ApplicationController
   end
 
   def check_status
-    @status = params[:status]
+    @status = params[:status] ? params[:status] : ''
   end
 
   # Only allow a list of trusted parameters through.
