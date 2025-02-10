@@ -1,14 +1,23 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController
+  before_action :check_speciality, only: %i[index]
   before_action :set_player, only: %i[show update destroy]
 
   # GET /players
-  def index
-    @players = Player.includes(:user)
-
+  def index speciality = "batsman"
+    if @speciality.empty?
+      @players = Player.includes(:user).order("#{@order_by} #{@order}")
+    else
+      @players = Player.includes(:user).where(speciality: @speciality).order("#{@order_by} #{@order}")
+    end
     render json: @players
   end
+  # def index
+  #   @players = Player.includes(:user)
+
+  #   render json: @players
+  # end
 
   # GET /players/1
   def show
@@ -44,6 +53,10 @@ class PlayersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_player
     @player = Player.find(params[:id])
+  end
+
+  def check_speciality
+    @speciality = params[:speciality] ? params[:speciality] : ''
   end
 
   # Only allow a list of trusted parameters through.

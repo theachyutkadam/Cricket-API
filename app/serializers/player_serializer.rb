@@ -26,7 +26,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PlayerSerializer < ActiveModel::Serializer
-  attributes :id, :contact, :gender, :birth_date, :speciality, :name, :first_name, :last_name, :middle_name, :user_id
+  attributes :id, :contact, :gender, :birth_date, :speciality, :name, :first_name, :last_name, :middle_name, :user_id, :email
   has_one :user
 
   def name
@@ -35,7 +35,7 @@ class PlayerSerializer < ActiveModel::Serializer
     nil
   end
 
-  # def user
-  #   object.user
-  # end
+  def email
+    object.user.email
+  end
 end

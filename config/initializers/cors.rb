@@ -32,6 +32,10 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       "http://192.168.1.39:1025",
       "http://192.168.1.39:4200",
       "http://192.168.1.40:4200",
+
+      # Ravikiran router
+      "http://192.168.31.168:4200",
+      "http://192.168.31.168:1025",
     ]
     resource "*", headers: :any, methods: %i[get post patch put delete options]
   end
