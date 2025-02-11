@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.players
+    @users = User.all
 
-    render json: @users.as_json()
+    render json: @users
   end
 
   # GET /users/1

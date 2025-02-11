@@ -24,5 +24,10 @@
 #  fk_rails_...  (role_id => roles.id)
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :status
+  attributes :id, :email, :status, :name
+
+
+  def name
+    object.email
+  end
 end
