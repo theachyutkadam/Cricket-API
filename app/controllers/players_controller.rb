@@ -7,9 +7,11 @@ class PlayersController < ApplicationController
   # GET /players
   def index speciality = "batsman"
     if @speciality.empty?
-      @players = Player.includes(:user).order("#{@order_by} #{@order}")
+      # @players = Player.includes(:user).order("#{@order_by} #{@order}")
+      @players = Player.order("#{@order_by} #{@order}")
     else
-      @players = Player.includes(:user).where(speciality: @speciality).order("#{@order_by} #{@order}")
+      # @players = Player.includes(:user).where(speciality: @speciality).order("#{@order_by} #{@order}")
+      @players = Player.where(speciality: @speciality).order("#{@order_by} #{@order}")
     end
     render json: @players
   end
